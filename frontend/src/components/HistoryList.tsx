@@ -14,9 +14,10 @@ export interface HistoryItem {
 interface HistoryListProps {
     history: HistoryItem[];
     onRestore: (item: HistoryItem) => void;
+    onDelete: (id: string, e: React.MouseEvent) => void;
 }
 
-export default function HistoryList({ history, onRestore }: HistoryListProps) {
+export default function HistoryList({ history, onRestore, onDelete }: HistoryListProps) {
     if (history.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center py-12 text-slate-500">
@@ -32,7 +33,7 @@ export default function HistoryList({ history, onRestore }: HistoryListProps) {
                 <div
                     key={item.id}
                     onClick={() => onRestore(item)}
-                    className="glass-panel p-4 rounded-2xl cursor-pointer hover:bg-white/5 transition-colors border border-white/5 hover:border-white/20 group"
+                    className="glass-panel p-4 rounded-2xl cursor-pointer hover:bg-white/5 transition-colors border border-white/5 hover:border-white/20 group relative"
                 >
                     <div className="flex justify-between items-start mb-2">
                         <div>
@@ -55,6 +56,17 @@ export default function HistoryList({ history, onRestore }: HistoryListProps) {
                             {item.gst && <span className="bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded">9%</span>}
                         </div>
                     </div>
+
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(item.id, e);
+                        }}
+                        className="absolute top-2 right-2 p-1.5 text-slate-500 hover:text-red-400 hover:bg-white/10 rounded-full transition-colors opacity-0 group-hover:opacity-100"
+                        title="Delete"
+                    >
+                        <span className="material-symbols-outlined text-sm">delete</span>
+                    </button>
                 </div>
             ))}
         </div>

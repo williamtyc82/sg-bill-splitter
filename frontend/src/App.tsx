@@ -82,6 +82,10 @@ export default function App() {
     });
   };
 
+  const handleDeleteHistoryItem = (id: string) => {
+    setHistory(prev => prev.filter(item => item.id !== id));
+  };
+
   const restoreHistoryItem = (item: HistoryItem) => {
     setBillName(item.billName);
     setBillAmount(item.totalBill); // Note: This sets the *total* including fees if we aren't careful, but our input expects raw bill. 
@@ -202,7 +206,11 @@ Each person owes: $${amountPerPerson.toFixed(2)}
               <ActionButtons onReset={handleReset} onShare={handleShare} />
             </>
           ) : (
-            <HistoryList history={history} onRestore={restoreHistoryItem} />
+            <HistoryList
+              history={history}
+              onRestore={restoreHistoryItem}
+              onDelete={handleDeleteHistoryItem}
+            />
           )}
         </main>
       </div>
