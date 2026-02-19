@@ -82,8 +82,8 @@ export default function App() {
     });
   };
 
-  const handleDeleteHistoryItem = (id: string) => {
-    setHistory(prev => prev.filter(item => item.id !== id));
+  const handleDeleteHistoryItem = (ids: string[]) => {
+    setHistory(prev => prev.filter(item => !ids.includes(item.id)));
   };
 
   const restoreHistoryItem = (item: HistoryItem) => {
