@@ -62,7 +62,7 @@ export default function HistoryList({ history, onRestore, onDelete }: HistoryLis
                             e.stopPropagation();
                             onDelete(item.id, e);
                         }}
-                        className="absolute top-2 right-2 p-1.5 text-slate-500 hover:text-red-400 hover:bg-white/10 rounded-full transition-colors opacity-0 group-hover:opacity-100"
+                        className="absolute top-2 right-2 p-1.5 text-slate-400 hover:text-red-400 hover:bg-white/10 rounded-full transition-colors"
                         title="Delete"
                     >
                         <span className="material-symbols-outlined text-sm">delete</span>
